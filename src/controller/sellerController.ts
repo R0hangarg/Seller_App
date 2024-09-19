@@ -34,8 +34,9 @@ export const sellerController = async (req: Request, res: Response) => {
         }
 
         const hashedPassword = await bcrypt.hash(user.password, 10);
-        const verificationToken = jwt.sign({email:user.email}, JWT_SECRET, { expiresIn: '1h' });
+        const verificationToken = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
 
+        const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
         const newUser = new sellerAccount({
             businessName: user.businessName,
             email: user.email,
@@ -46,10 +47,12 @@ export const sellerController = async (req: Request, res: Response) => {
         });
 
         const savedUser = await newUser.save();
-        
         await sendVerificationEmail(user.email, verificationToken);
-
-        return res.status(201).json({
+        return res.cookie('token', token, {
+            httpOnly: true, // JavaScript can't access the cookie
+            maxAge: 3600000, // Cookie expiration time (1 hour in milliseconds)
+            sameSite: 'strict' // Prevent CSRF attacks
+        }).status(201).json({
             status: true,
             message: "Seller registered successfully",
             data: savedUser,

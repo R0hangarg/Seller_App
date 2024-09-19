@@ -15,8 +15,17 @@ const sellerSchema = new Schema<sellerType>({
     },
     emailVerified: { type: Boolean, default: false },
     verificationToken: { type: String },
+    businessDescription: { type: String },
+    logoUrl: { type: String, match: /^https?:\/\// }, // Validate URL
+    website: { type: String, match: /^https?:\/\// }, // Validate URL
+    socialMediaLinks: [
+        {
+            platform: { type: String, required: true },
+            url: { type: String, match: /^https?:\/\//, required: true }, // Validate URL
+        }
+    ],
 })
 
-const sellerAccount = mongoose.model<sellerType>('sellerAccount',sellerSchema);
+const sellerAccount = mongoose.model<sellerType>('sellerAccount', sellerSchema);
 
 export default sellerAccount;

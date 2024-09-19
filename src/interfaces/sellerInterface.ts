@@ -6,6 +6,11 @@ interface Address {
     country: string;
 }
 
+interface SocialMediaLink {
+    platform: string;
+    url: string;
+}
+
 export interface sellerType{
     businessName: string,
     email:string,
@@ -14,4 +19,8 @@ export interface sellerType{
     address: Address,
     emailVerified: boolean,
     verificationToken?: string,
+    businessDescription: string,
+    logoUrl?: string,
+    website?: string,
+    socialMediaLinks?: SocialMediaLink[],
 }
