@@ -9,3 +9,13 @@ export const productValidation = Joi.object({
     images: Joi.array().items(Joi.string().uri()).optional(),
     sku: Joi.string().required(),
 })
+
+export const updateProductValidation = Joi.object({
+    name: Joi.string().optional(),
+    description: Joi.string().optional(),
+    price: Joi.number().positive().optional(),
+    quantity: Joi.number().integer().min(0).optional(),
+    category: Joi.string().optional(),
+    images: Joi.array().items(Joi.string().uri()).optional(),
+    sku: Joi.string().optional(),
+})

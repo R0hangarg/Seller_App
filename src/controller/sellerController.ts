@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import sellerAccount from "../models/sellerModel";
 import bcrypt from 'bcryptjs'
 import { sellerSchema } from "../validations/sellerAccountValidations";
-import crypto from 'crypto';
 import { sendVerificationEmail } from "../utils/emailService";
 import jwt from 'jsonwebtoken'
 

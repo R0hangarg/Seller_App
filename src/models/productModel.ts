@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 import { Product } from '../interfaces/productSchemaInterface';
 
 const productSchema = new Schema<Product>({
+    sellerId: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
     name:{type:String , required:true},
     description:{type:String},
     price:{type:Number,required:true ,min:0},
@@ -12,6 +13,7 @@ const productSchema = new Schema<Product>({
         message: 'Invalid image URL format'
     }},
     sku: { type: String, required: true, unique: true },
+    isActive: { type: Boolean, default: true } // For soft delete
 })
 
 const Product = mongoose.model('products',productSchema);

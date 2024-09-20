@@ -27,7 +27,7 @@ export const resetPassword = async (req: Request, res: Response) => {
         userCheck.verificationToken = resetToken;
         userCheck.save();
 
-        // await resetPasswordEmail(email, resetToken)
+        await resetPasswordEmail(email, resetToken)
 console.log(resetToken)
         return res.status(200).json({
             status: true,

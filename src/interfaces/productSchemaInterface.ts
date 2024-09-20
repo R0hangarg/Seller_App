@@ -1,5 +1,7 @@
+import{ Types } from 'mongoose';
+
 export interface Product  {
-    sellerId: string;
+    sellerId: Types.ObjectId;
     name: string;
     description?: string;
     price: number;
@@ -7,4 +9,12 @@ export interface Product  {
     category: string;
     images?: string[];
     sku: string;
+    isActive:boolean
+}
+
+export interface ProductQuery {
+    page?: number;
+    limit?: number;
+    search?: string;
+    category?: string;
 }
