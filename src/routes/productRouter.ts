@@ -1,10 +1,6 @@
 import express from 'express'
-import { createProduct } from '../controller/createProductController';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
-import { updateProduct } from '../controller/updateProductController';
-import { deleteProductController } from '../controller/deleteProductController';
-import { getAllProducts } from '../controller/getAllProducts';
-
+import { createProduct, deleteProductController, getAllProducts, updateProduct } from '../controller/productController';
 const productRouter = express.Router();
 
 productRouter.post('/:sellerId/products',isAuthenticated, createProduct);

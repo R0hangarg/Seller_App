@@ -24,3 +24,8 @@ export interface sellerType{
     website?: string,
     socialMediaLinks?: SocialMediaLink[],
 }
+
+export interface sellerLoginType{
+    password:string,
+    email:string,
+}
