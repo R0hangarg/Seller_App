@@ -5,12 +5,15 @@ import sellerRouter from './routes/sellerRoute';
 import cookieParser from 'cookie-parser'
 import rateLimit from 'express-rate-limit'
 import productRouter from './routes/productRouter';
+import orderRouter from './routes/orderRoutes';
+import cors from 'cors'
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 
@@ -20,9 +23,12 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, please try again later.'
 });
 
+app.use(express.static('public'))
+
 app.use(limiter)
 app.use('/api/sellers', sellerRouter);
 app.use('/api/sellers',productRouter);
+app.use('/api',orderRouter)
 
 connectDB.then(() => {
     app.listen(PORT, () => {
